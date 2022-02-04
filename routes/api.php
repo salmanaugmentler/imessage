@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/message/fetch/{senderId}/{receiverId}',[MessageController::class,'index'])->name('fetch_message');
 
 //Store Messages
-Route::get('/message/store/{userId}/{inboxId}/{message}',[MessageController::class,'store'])->name('store_message');
+Route::get('/message/store/{senderId}/{receiverId}/{message}',[MessageController::class,'store'])->name('store_message');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

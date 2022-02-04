@@ -15,7 +15,7 @@ class MessageController extends Controller
      */
     public function index($sender_id,$receiver_id)
     {
-        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id]);
+        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id])->chunk(20)->first();
 
         return response()->json($messages);
     }
@@ -40,10 +40,12 @@ class MessageController extends Controller
     {
 
         $message = new Message([
-            'sender_id' => $request->sender_id,
-            'receiver_id' => $request->receiver_id,
+            'sender_id' => $request->senderId,
+            'receiver_id' => $request->receiverId,
             'message' => $request->message,
         ]);
+
+        $message->save();
 
         event(new MessageReceived($message));
 
