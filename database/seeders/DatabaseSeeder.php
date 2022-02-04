@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         User::factory(2)->create();
+         Message::factory(50)->create();
     }
 }

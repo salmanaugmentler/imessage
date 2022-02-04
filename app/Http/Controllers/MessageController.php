@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inbox;
-use App\Models\User;
+use App\Events\MessageReceived;
+use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class InboxesController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($username)
+    public function index($sender_id,$receiver_id)
     {
+        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id]);
 
+        return response()->json($messages);
     }
 
     /**
@@ -26,12 +27,7 @@ class InboxesController extends Controller
      */
     public function create()
     {
-        $inbox = Inbox::create([
-
-        ]);
-
-        $inbox->attach(1);
-        $inbox->attach(2);
+        //
     }
 
     /**
@@ -42,7 +38,16 @@ class InboxesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $message = new Message([
+            'sender_id' => $request->sender_id,
+            'receiver_id' => $request->receiver_id,
+            'message' => $request->message,
+        ]);
+
+        event(new MessageReceived($message));
+
+        return response()->json($message->message);
     }
 
     /**

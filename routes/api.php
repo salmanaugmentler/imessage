@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InboxesController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Get the information of user
-Route::get('/inboxes/{username}', [InboxesController::class,'index'])->name('inbox.index');
+//Retrieve Messages
+Route::get('/message/fetch/{senderId}/{receiverId}',[MessageController::class,'index'])->name('fetch_message');
+
+//Store Messages
+Route::get('/message/store/{userId}/{inboxId}/{message}',[MessageController::class,'store'])->name('store_message');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
