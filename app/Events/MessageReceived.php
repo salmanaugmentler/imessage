@@ -47,4 +47,9 @@ class MessageReceived implements ShouldBroadcast
             return $receiver.'-'.$sender;
         }
     }
+
+    public function broadcastAs()
+    {
+        return 'my-event';
+    }
 }

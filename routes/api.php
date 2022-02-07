@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Retrieve Messages
-Route::get('/message/fetch/{senderId}/{receiverId}',[MessageController::class,'index'])->name('fetch_message');
+Route::group(['prefix' => '/message'],function () {
+    //Retrieve Messages
+    Route::get('/fetch/{senderId}/{receiverId}', [MessageController::class, 'index'])->name('fetch_message');
+    //Store Messages
+    Route::get('/store/{senderId}/{receiverId}/{message}', [MessageController::class, 'store'])->name('store_message');
+});
 
-//Store Messages
-Route::get('/message/store/{senderId}/{receiverId}/{message}',[MessageController::class,'store'])->name('store_message');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
