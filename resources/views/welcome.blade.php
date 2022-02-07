@@ -37,8 +37,8 @@
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <code class="bg-dark text-white badge p-2 text-left d-block mb-1">/api/message/store/[sender-id]/[receiver-id]/[Message to be stored]</code>
-                            <code class="bg-dark text-white badge p-2 text-left d-block mb-1">/api/message/fetch/[user-1-id]/[user-2-id]</code>
+                            <code class="bg-dark text-white badge p-2 text-left d-block mb-1"><span class="badge bg-info p-1">POST</span> /api/message/store/[sender-id]/[receiver-id]/[Message to be stored] </code>
+                            <code class="bg-dark text-white badge p-2 text-left d-block mb-1"><span class="badge bg-info p-1">POST</span> /api/message/fetch/[user-1-id]/[user-2-id]/[offset=20]</code>
                         </div>
                     </div>
                 </div>
