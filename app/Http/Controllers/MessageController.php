@@ -15,7 +15,7 @@ class MessageController extends Controller
      */
     public function index($sender_id,$receiver_id)
     {
-        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id])->chunk(20)->first();
+        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id])->sortBy('DESC')->chunk(20)->first();
 
         return response()->json($messages);
     }
