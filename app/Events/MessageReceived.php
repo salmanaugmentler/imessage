@@ -33,7 +33,12 @@ class MessageReceived implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel($this->getChannel($this->message->sender_id,$this->message->receiver_id));
+        return new Channel($this->getChannel($this->message->sender_id,$this->message->receiver_id));
+    }
+
+    public function broadcastAs()
+    {
+        return 'my-event';
     }
 
     public function getChannel($sender, $receiver)
@@ -46,10 +51,5 @@ class MessageReceived implements ShouldBroadcast
         {
             return $receiver.'-'.$sender;
         }
-    }
-
-    public function broadcastAs()
-    {
-        return 'my-event';
     }
 }
