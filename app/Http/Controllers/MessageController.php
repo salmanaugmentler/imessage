@@ -13,9 +13,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($sender_id,$receiver_id)
+    public function index(Request $request)
     {
-        $messages = Message::all()->whereIn('sender_id', [$sender_id,$receiver_id])->whereIn('receiver_id',[$sender_id,$receiver_id])->sortBy('DESC')->chunk(20)->first();
+        $messages = Message::whereIn('sender_id', [$request->senderId,$request->receiverId])->whereIn('receiver_id',[$request->senderId,$request->receiverId])->orderBy('created_at','DESC')->skip($request->offset)->take(20)->get();
 
         return response()->json($messages);
     }

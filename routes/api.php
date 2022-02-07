@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/message'],function () {
     //Retrieve Messages
-    Route::get('/fetch/{senderId}/{receiverId}', [MessageController::class, 'index'])->name('fetch_message');
+    Route::get('/fetch/{senderId}/{receiverId}/{offset}', [MessageController::class, 'index'])->name('fetch_message');
     //Store Messages
     Route::get('/store/{senderId}/{receiverId}/{message}', [MessageController::class, 'store'])->name('store_message');
 });
