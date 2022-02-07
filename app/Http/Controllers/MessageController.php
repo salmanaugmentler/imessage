@@ -49,7 +49,7 @@ class MessageController extends Controller
 
         event(new MessageReceived($message));
 
-        return response()->json($message->message);
+        return response()->json($message->message.' Boardcasted succesfully');
     }
 
     /**
